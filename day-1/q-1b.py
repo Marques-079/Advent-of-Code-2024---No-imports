@@ -20,19 +20,8 @@ def frequency_counter(data):
             frequency[item] = 1
     return frequency
 
-def similarity(list, frequency):
-    total = []
-    for i in range(len(list)):
-        if list[i] in frequency:
-            calc = list[i] * frequency[list[i]]
-            total.append(calc)
-        else:
-            total.append(0)
-        
-    return sum(total)
-
-hashed = frequency_counter(left)
-similarity_total = similarity(right, hashed)
+frequency = frequency_counter(left)
+similarity_total = sum(r * frequency.get(r, 0) for r in right)
 print(f'This is the similarity total: {similarity_total}')
 
 
