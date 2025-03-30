@@ -10,7 +10,7 @@ def muls_present(sub):
         num1 += sub[i]
         i += 1
         if len(num1) > 3:
-            return 0
+            return 0    
 
     if i >= len(sub) or sub[i] != ',' or num1 == "":
         return 0
