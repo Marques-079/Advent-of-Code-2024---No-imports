@@ -53,7 +53,7 @@ def flipped_horizontal_check(line):
 
 def flipped_vertical_check(four_set):
     vert_sum = 0
-    for i in range(len(four_set[0]) - 3):
+    for i in range(len(four_set[0])):
         if (four_set[0][i] == 'S' and
             four_set[1][i] == 'A' and
             four_set[2][i] == 'M' and
