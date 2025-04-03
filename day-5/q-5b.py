@@ -1,4 +1,4 @@
-from collections import deque, defaultdict
+#Completed 03/04/2025
 
 pair_data = []
 list_data = []
@@ -13,23 +13,24 @@ with open('day-5/INPUT5.txt', 'r') as f:
         elif ',' in line:
             list_data.append(line)
 
-rules = defaultdict(set)
-#anti_rules = defaultdict(set)
+rules = {}
 
 for pair in pair_data:
     left, right = pair.split('|')
     a = int(left)
     b = int(right)
-    rules[a].add(b)  #A must come before B - Lookup for A precencse 
-    #anti_rules[b].add(a)   #A must come before B  - Lookup for B precencse 
+
+    if a not in rules:
+        rules[a] = set()
+    rules[a].add(b)
 
 valid_updates = []
 invalid_updates = []
-for line in list_data:
-   
-    pages = list(map(int, line.split(',')))
 
+for line in list_data:
+    pages = list(map(int, line.split(',')))
     is_valid = True
+    
     for page in pages:
         if page in rules:
             for must_come_after in rules[page]:
@@ -37,7 +38,6 @@ for line in list_data:
                     if pages.index(page) >= pages.index(must_come_after):
                         is_valid = False
                         break
-        
         if not is_valid:
             break
 
@@ -47,18 +47,14 @@ for line in list_data:
         invalid_updates.append(pages)
 
 
-
 def topological_sort(pages, rules):
-    
-    # Build graph
-    graph = defaultdict(list)
-    in_degree = defaultdict(int)
+    graph = {}
+    in_degree = {}
 
-    # Initialize in-degree to 0 for every page in this update
     for p in pages:
         in_degree[p] = 0
+        graph[p] = []  
 
-    # Populate graph edges for the relevant rules
     for a in pages:
         if a in rules:
             for b in rules[a]:
@@ -67,37 +63,40 @@ def topological_sort(pages, rules):
                     graph[a].append(b)
                     in_degree[b] += 1
 
-    # Start queue with nodes that have in_degree = 0
-    queue = deque([p for p in pages if in_degree[p] == 0])
+
+    queue = [p for p in pages if in_degree[p] == 0]
+
     sorted_order = []
 
     while queue:
-        node = queue.popleft()
+
+        node = queue.pop(0)
         sorted_order.append(node)
+
 
         for neighbor in graph[node]:
             in_degree[neighbor] -= 1
+ 
             if in_degree[neighbor] == 0:
                 queue.append(neighbor)
 
     if len(sorted_order) == len(pages):
-        return list(sorted_order)
+        return sorted_order
     else:
-        # There's a cycle or contradiction
         return None
-    
-print(invalid_updates)
+        
 sorted_invalids = []
 
 for i in invalid_updates:
-    sorted_invalids.append(topological_sort(i, rules))
+    sorted_result = topological_sort(i, rules)
+    if sorted_result is not None:
+        sorted_invalids.append(sorted_result)
 
 total_sum = 0
 for pages in sorted_invalids:
     n = len(pages)
     middle_idx = n // 2
     middle_page = pages[middle_idx]
-    total_sum += middle_page
+    total_sum += middle_page    
 
 print("Sum of the middle pages of all invalid updates:", total_sum)
-
