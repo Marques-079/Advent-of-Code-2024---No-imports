@@ -1,7 +1,6 @@
 #Completed 04/04/2025
 
 with open('day-6/INPUT6.txt', 'r') as f:
-    # Convert each line into a list of characters
     grid = [list(line.strip()) for line in f if line.strip()]
 
 n_rows = len(grid)
