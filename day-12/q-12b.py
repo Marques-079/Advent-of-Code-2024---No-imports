@@ -1,45 +1,119 @@
-from helpers.importHelpers import *
+#Completed 10/04/2025 
 
-plantID = 0
-garden = [list(line) for line in getInput().splitlines()]
-fields = {} # plantID: (area, perimeter, sides)
+with open('day-12/INPUT12.txt', 'r') as f:
+    grid = [list(line.strip()) for line in f if line.strip()]
 
-def inBounds(x, y):
-  return 0 <= x < len(garden[0]) and 0 <= y < len(garden) # garden has same width and height
+seen = set()
+directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+direction_letters = {(0, 1): '>', (1, 0): 'V', (0, -1): '<', (-1, 0): '^'}
 
-def floodill(plant, x, y):
-  if not inBounds(x, y):
-    return 0, 1 # out of bounds
-  if garden[y][x] == plantID:
-    return 0, 0 # already covered
-  if garden[y][x] != plant:
-    return 0, 1 # different plant
-  garden[y][x] = plantID
-  area, perimeter = 1, 0
-  for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
-    a, p = floodill(plant, x + dx, y + dy)
-    area += a
-    perimeter += p
-  return area, perimeter
+def in_bounds(x, y):
+    return 0 <= x < len(grid) and 0 <= y < len(grid[0])
 
-for y in range(len(garden)):
-  for x in range(len(garden[0])):
-    if not isinstance(garden[y][x], int):
-      area, perimeter = floodill(garden[y][x], x, y)
-      fields[plantID] = (area, perimeter, perimeter) # perimeter is default for number of sides. reduced later
-      plantID += 1
+def dfs(x, y, typ):
+    
+    seen.add((x, y, typ))
+    area = 1
+    perimeter = 0
+    edge_list = []
+    
+    queue = [(x, y)]
+    while queue:
+        cx, cy = queue.pop(0)
+        for dx, dy in directions:
+            new_x, new_y = cx + dx, cy + dy
+        
+            if not in_bounds(new_x, new_y):
+                perimeter += 1
+                edge_list.append((cx, cy, direction_letters[(dx, dy)]))
+            
+            elif grid[new_x][new_y] != typ:
+                perimeter += 1
+                edge_list.append((cx, cy, direction_letters[(dx, dy)]))
+            
+            elif (new_x, new_y, typ) not in seen:
+                seen.add((new_x, new_y, typ))
+                area += 1 
+                queue.append((new_x, new_y))
+    return area, perimeter, edge_list
 
-for y in range(len(garden)):
-  for x in range(len(garden[0])):
-    currentPlant = garden[y][x] # for each cell
-    for movex, movey in [(1, 0), (0, 1)]: # move right and down
-      if not inBounds(x+movex, y+movey) or garden[y+movey][x+movex] != currentPlant: # if leaving the field, nothing happens
-        continue
-      # If next cell is part of same field, check sides of originial cell and next cell.
-      for sidex, sidey in [(movey, movex), (-movey, -movex)]: # sides are calculated with offset perpendicular to the direction of movement
-        if not inBounds(x+sidex, y+sidey) or (currentPlant != garden[y+sidey][x+sidex] and currentPlant != garden[y+movey+sidey][x+movex+ sidex]):
-          # if side of previous cell and side of next cell are both not part of field, number of sides is reduced by one
-          fields[currentPlant] = (fields[currentPlant][0], fields[currentPlant][1], fields[currentPlant][2] - 1)
 
-print("Part 1: ", sum(area*perimeter for area, perimeter, _ in fields.values()))
-print("Part 2: ", sum(area*sides for area, _, sides in fields.values()))
+def group_consecutive(nums):
+    if not nums:
+        return []
+    
+    nums = sorted(nums)  # Ensure it's sorted
+    groups = []
+    current_group = [nums[0]]
+
+    for i in range(1, len(nums)):
+        if nums[i] == nums[i-1] + 1:
+            current_group.append(nums[i])
+        else:
+            groups.append(current_group)
+            current_group = [nums[i]]
+    
+    groups.append(current_group)  # Add the last group
+    return groups
+
+
+def count_edges(points):
+  
+    sliced = []
+    sliced2 = []
+    xs = [p[0] for p in points]
+    ys = [p[1] for p in points]
+    min_x, max_x = min(xs), max(xs)
+    min_y, max_y = min(ys), max(ys)
+
+    total = 0
+    #Cycled though horizontal edges (Up and down)
+    for i in range(min_x, max_x + 1):  
+        for j in points:
+            if i == j[0] and j[2] == '^':
+                sliced.append(j[1])
+            elif i == j[0] and j[2] == 'V':
+                sliced2.append(j[1])
+        #print(sliced)
+        #print(sliced2)
+        total += len(group_consecutive(sliced))
+        total += len(group_consecutive(sliced2))
+        sliced = []
+        sliced2 = []
+        
+    # Now we need to do this for the vertical edges (Left and right)
+    for i in range(min_y, max_y + 1):  
+        for j in points:
+            if i == j[1] and j[2] == '<':
+                sliced.append(j[0])
+            elif i == j[1] and j[2] == '>':
+                sliced2.append(j[0])
+        #print(sliced)
+        #print(sliced2)
+        total += len(group_consecutive(sliced))
+        total += len(group_consecutive(sliced2))
+        sliced = []
+        sliced2 = []
+
+    return total
+
+value = 0
+bfs_edges_collection = []
+areas = []
+perimeters = []
+
+for i in range(len(grid)):
+    for j in range(len(grid[i])):
+        cell_type = grid[i][j]
+        if (i, j, cell_type) not in seen:
+            a, p, edges = dfs(i, j, cell_type)
+            value += a * p
+            areas.append(a)
+            bfs_edges_collection.append(((i, j), edges))
+
+for i in range(len(bfs_edges_collection)):
+    perimeters.append(count_edges(bfs_edges_collection[i][1]))
+
+totalsums = sum(a * b for a, b in zip(areas, perimeters))
+print(totalsums)
+
