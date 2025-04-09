@@ -21,7 +21,7 @@ def dfs(x, y, type):
             new_x, new_y = x + dx, y + dy
             if not in_bounds(new_x, new_y):
                 perimeter += 1
-            elif grid[new_x][new_y] != type:
+            elif grid[new_x][new_y] !=  type:
                 perimeter += 1
             elif (new_x, new_y, type) not in seen:
                 seen.add((new_x, new_y, type))
