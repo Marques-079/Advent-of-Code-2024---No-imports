@@ -5,12 +5,13 @@ with open('day-12/INPUT12.txt', 'r') as f:
 
 seen = set()
 directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+walls = ['^', 'v', '<', '>']
 
 def in_bounds(x, y):
     return 0 <= x < len(grid) and 0 <= y < len(grid[0])
 
-def dfs(x, y, type):
-    seen.add((x, y, type))
+def dfs(x, y, type, walls):
+    seen.add((x, y, type, walls))
     area = 1
     perimeter = 0
 
@@ -19,9 +20,9 @@ def dfs(x, y, type):
         x, y = queue.pop(0)
         for dx, dy in directions:
             new_x, new_y = x + dx, y + dy
-            if not in_bounds(new_x, new_y):
+            if not in_bounds(new_x, new_y):##
                 perimeter += 1
-            elif grid[new_x][new_y] != type:
+            elif grid[new_x][new_y] != type: ##
                 perimeter += 1
             elif (new_x, new_y, type) not in seen:
                 seen.add((new_x, new_y, type))
@@ -34,7 +35,13 @@ for i in range(len(grid)):
     for j in range(len(grid[i])):
         type = grid[i][j]
         if (i, j, type) not in seen:
-            area, perimeter = dfs(i, j, type)
+            area, perimeter = dfs(i, j, type, None)
             value += area * perimeter
 
 print(value)
+
+
+'''
+If same direction and neighbour exists in the same col/row then it is a valid pair. 
+How to handle 2 + walls -> pass walls made as an array between neighbours and check array for discounts.
+'''
