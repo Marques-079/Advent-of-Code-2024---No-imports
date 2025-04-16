@@ -14,7 +14,7 @@ for line in lines:
 
 grid = [list(row) for row in grid_lines]
 directions = list(directions_line)
-print(directions)
+
 
 
 def bounds_scan(x, y):
