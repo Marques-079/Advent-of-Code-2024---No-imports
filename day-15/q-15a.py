@@ -15,21 +15,19 @@ for line in lines:
 grid = [list(row) for row in grid_lines]
 directions = list(directions_line)
 
-
-
 def bounds_scan(x, y):
     return 0 < x < (len(grid) - 2)  and 0 < y < (len(grid[0]) - 2)
 
 def move_robot(robot_pos, move_direction, grid):
     x, y = robot_pos
     if move_direction == '^':
-        dx, dy = -1, 0
-    elif move_direction == 'v':
-        dx, dy = 1, 0
-    elif move_direction == '<':
-        dx, dy = 0, -1
-    elif move_direction == '>':
         dx, dy = 0, 1
+    elif move_direction == 'v':
+        dx, dy = 0, -1
+    elif move_direction == '<':
+        dx, dy = -1, 0
+    elif move_direction == '>':
+        dx, dy = 1, 0
     else:
         return robot_pos  
 
@@ -57,13 +55,13 @@ def move_robot(robot_pos, move_direction, grid):
 def push_crates(x, y, direction, grid):
     
     if direction == '^':
-        dx, dy = -1, 0
-    elif direction == 'v':
-        dx, dy = 1, 0
-    elif direction == '<':
-        dx, dy = 0, -1
-    elif direction == '>':
         dx, dy = 0, 1
+    elif direction == 'v':
+        dx, dy = 0, -1
+    elif direction == '<':
+        dx, dy = -1, 0
+    elif direction == '>':
+        dx, dy = 1, 0
 
     next_x, next_y = x + dx, y + dy
 
@@ -110,7 +108,8 @@ def simulate(grid, directions):
 
     for move_direction in directions:
         robot_pos = move_robot(robot_pos, move_direction, grid)
+    return grid
 
 simulate(grid, directions)
 result = calculate_gps_sum(grid)
-print("Sum of all boxes' GPS coordinates:", result)
+print("Sum of all boxes GPS coords", result)
