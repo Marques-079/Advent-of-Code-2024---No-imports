@@ -1,4 +1,4 @@
-
+#completed 17/04/2025
 
 with open("day-15/INPUT15.txt") as f:
     lines = f.read().splitlines()
@@ -15,25 +15,22 @@ for line in lines:
 grid = [list(row) for row in grid_lines]
 directions = list(directions_line)
 
-def bounds_scan(x, y):
-    return 0 < x < (len(grid) - 2)  and 0 < y < (len(grid[0]) - 2)
-
 def move_robot(robot_pos, move_direction, grid):
     x, y = robot_pos
     if move_direction == '^':
-        dx, dy = 0, 1
-    elif move_direction == 'v':
-        dx, dy = 0, -1
-    elif move_direction == '<':
         dx, dy = -1, 0
-    elif move_direction == '>':
+    elif move_direction == 'v':
         dx, dy = 1, 0
+    elif move_direction == '<':
+        dx, dy = 0, -1
+    elif move_direction == '>':
+        dx, dy = 0, 1
     else:
         return robot_pos  
 
     new_x, new_y = x + dx, y + dy
 
-    if not bounds_scan(new_x, new_y) or grid[new_x][new_y] == '#':
+    if grid[new_x][new_y] == '#':
         return robot_pos
 
     if grid[new_x][new_y] == '.':
@@ -55,17 +52,17 @@ def move_robot(robot_pos, move_direction, grid):
 def push_crates(x, y, direction, grid):
     
     if direction == '^':
-        dx, dy = 0, 1
-    elif direction == 'v':
-        dx, dy = 0, -1
-    elif direction == '<':
         dx, dy = -1, 0
-    elif direction == '>':
+    elif direction == 'v':
         dx, dy = 1, 0
+    elif direction == '<':
+        dx, dy = 0, -1
+    elif direction == '>':
+        dx, dy = 0, 1
 
     next_x, next_y = x + dx, y + dy
 
-    if not bounds_scan(next_x, next_y) or grid[next_x][next_y] == '#':
+    if grid[next_x][next_y] == '#':
         return False
 
     if grid[next_x][next_y] == '.':
@@ -111,5 +108,6 @@ def simulate(grid, directions):
     return grid
 
 simulate(grid, directions)
+#print(grid)
 result = calculate_gps_sum(grid)
 print("Sum of all boxes GPS coords", result)
