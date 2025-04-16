@@ -10,10 +10,11 @@ for line in lines:
     if line.startswith("#") or line.startswith(".") or line.startswith("O") or line.startswith("@"):
         grid_lines.append(line)
     elif set(line).issubset({"^", "v", "<", ">"}):
-        directions_line = line
+        directions_line += line
 
 grid = [list(row) for row in grid_lines]
 directions = list(directions_line)
+print(directions)
 
 
 def bounds_scan(x, y):
