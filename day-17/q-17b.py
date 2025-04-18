@@ -1,4 +1,4 @@
-with open('day-17/INPUT17.txt', 'r') as f:
+with open('day-17/test17.txt', 'r') as f:
     lines = f.read().splitlines()
 
 registers = {}
@@ -15,8 +15,8 @@ for line in lines:
     elif line.startswith("Program:"):
         program = list(map(int, line.split(":")[1].strip().split(",")))
         
-print(program)
-print(registers)
+#print(program)
+#print(registers)
 
 def resolve_combo_operand(operand):
     if operand <= 3:
