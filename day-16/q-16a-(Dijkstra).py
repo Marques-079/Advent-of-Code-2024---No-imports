@@ -18,7 +18,7 @@ def dijkstras(grid):
     visited = set()
 
     while priorityq:
-        priorityq.sort(reverse =True) 
+        priorityq.sort(reverse =True) #Sorts by lowest cost, explores mroe promising paths with low costs earlier
         cost, r, c, dir = priorityq.pop()
 
         if (r, c, dir) in visited: #if same state has been found then skip because this is an infinite loop
