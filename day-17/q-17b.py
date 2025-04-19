@@ -154,3 +154,9 @@ def solve(p, r):
     return False
 
 solve(len(g) - 1, 0)
+
+print(int("164541160582845", 8))
+
+'''
+
+'''
