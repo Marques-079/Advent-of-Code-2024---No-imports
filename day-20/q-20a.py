@@ -29,6 +29,28 @@ print(f'Baseline is: {baseline}')
 cut_off = baseline - 100
 print(f'Cut off is: {cut_off}')
 
+def mini_bfs(y, x, dist):
+    threshold = 102
+    seen = set()
+    queue = [(y,x)]
+    total = 0
+
+    while queue:
+        y, x = queue.pop()
+
+        if (y,x) in seen:
+            continue
+        seen.add((y,x))
+
+        for dy, dx in directions:
+            ny, nx = y + dy, x + dx
+            if 0 <= ny < rows and 0 <= nx < cols and dist[ny][nx] == -1:
+                queue.apppend((ny, nx))
+            elif 0 <= ny < rows and 0 <= nx < cols and dist[ny][nx] != -1:
+                if (dist[y][x] - dist[ny][nx] >= 102):
+                    total += 1
+    return total
+
 save_threshold = 102
 count = 0
 for y in range(1, rows-1):
