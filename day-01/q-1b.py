@@ -1,6 +1,6 @@
 #Solved 29/03/2025
 
-with open("day-1/INPUT.txt") as f:
+with open("day-01/INPUT.txt") as f:
     lines = f.read().strip().splitlines()
 
 left = []
