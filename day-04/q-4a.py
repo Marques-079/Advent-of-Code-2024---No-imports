@@ -1,6 +1,6 @@
-#Completed 31/03/2025
+#Completed 31/03/2025#
 
-with open("day-4/INPUT4.txt") as f:
+with open("day-04/INPUT4.txt") as f:
     lines = f.read().strip().splitlines()
 
 def horizontal_check(line):

@@ -1,4 +1,4 @@
-#Completed 09/04/2025
+#Completed 09/04/2025#
 
 with open('day-12/INPUT12.txt', 'r') as f:
     grid = [list(line.strip()) for line in f if line.strip()]

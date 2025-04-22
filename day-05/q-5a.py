@@ -1,11 +1,9 @@
-#completed 03/04/2025
-
-from collections import defaultdict
+#completed 03/04/2025#
 
 pair_data = []
 list_data = []
 
-with open('day-5/INPUT5.txt', 'r') as f:
+with open('day-05/INPUT5.txt', 'r') as f:
     for line in f:
         line = line.strip()
         if not line:
@@ -15,19 +13,20 @@ with open('day-5/INPUT5.txt', 'r') as f:
         elif ',' in line:
             list_data.append(line)
 
-rules = defaultdict(set)
-
+# Replace defaultdict(set) with a regular dictionary
+rules = {}
 for pair in pair_data:
     left, right = pair.split('|')
     a = int(left)
     b = int(right)
-    rules[a].add(b)  #A must come before B - Lookup for A precencse 
-
+    if a not in rules:
+        rules[a] = set()
+    rules[a].add(b)  # A must come before B
 
 valid_updates = []
 invalid_updates = []
+
 for line in list_data:
-   
     pages = list(map(int, line.split(',')))
 
     is_valid = True
@@ -40,6 +39,7 @@ for line in list_data:
                         break
         if not is_valid:
             invalid_updates.append(pages)
+            break  # exit outer loop early if already invalid
 
     if is_valid:
         valid_updates.append(pages)
@@ -52,4 +52,3 @@ for pages in valid_updates:
     total_sum += middle_page
 
 print("Sum of the middle pages of all valid updates:", total_sum)
-

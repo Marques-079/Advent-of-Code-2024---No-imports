@@ -5,7 +5,7 @@ def pattern1(grid):
     diag2 = grid[2][0] + grid[1][1] + grid[0][2]
     return diag1 in {"MAS", "SAM"} and diag2 in {"MAS", "SAM"}
 
-with open("day-4/INPUT4.txt") as f:
+with open("day-04/INPUT4.txt") as f:
     lines = f.read().strip().splitlines()
 
 total = 0

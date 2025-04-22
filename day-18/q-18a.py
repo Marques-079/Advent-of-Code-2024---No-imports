@@ -1,4 +1,4 @@
-#Completed 20/04/2025
+#Completed 20/04/2025#
 
 coordinates = []
 with open('day-18/INPUT18.txt', 'r') as f:

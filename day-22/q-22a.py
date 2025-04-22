@@ -1,4 +1,4 @@
-#Completed 22/04/2025
+#Completed 22/04/2025#
 
 secret_numbers = []
 with open('day-22/INPUT22.txt', 'r') as f:

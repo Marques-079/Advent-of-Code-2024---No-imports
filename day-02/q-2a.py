@@ -1,4 +1,4 @@
-# Completed on 31/03/2025#
+# Completed on 31/03/2025
 
 with open("day-02/INPUT2.txt") as f:
     lines = f.read().strip().splitlines()

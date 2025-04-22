@@ -1,4 +1,4 @@
-with open('day-8/INPUT8.txt', 'r') as f:
+with open('day-08/INPUT8.txt', 'r') as f:
     grid = [list(line.strip()) for line in f if line.strip()]
 
 def x_axis_distance_chars(chars):

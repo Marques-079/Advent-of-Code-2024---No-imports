@@ -1,4 +1,4 @@
-#Notes: Grid is 101 x 103 tiles
+#Notes: Grid is 101 x 103 tiles#
 p_v = []
 with open("day-14/INPUT14.txt") as file:
     for line in file:

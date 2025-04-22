@@ -31,7 +31,7 @@ def pattern1(grid):
     else:
         return False
     
-with open("day-4/INPUT4.txt") as f:
+with open("day-04/INPUT4.txt") as f:
     lines = f.read().strip().splitlines()
 
 total = 0

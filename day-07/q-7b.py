@@ -14,7 +14,7 @@ def read_input(file_path):
             print(f"Skipping bad line: {line}")
     return result
 
-data = read_input("day-7/INPUT7.txt")
+data = read_input("day-07/INPUT7.txt")
 total = 0
 valid_equations = []
 

@@ -58,7 +58,7 @@ def solve(input_str):
                 antinode_positions.update(line_points)
     return len(antinode_positions)
 
-if __name__ == '__main__':
-    with open('day-8/INPUT8.txt', 'r') as f:
-        input_str = f.read()
-    print("Antinode count:", solve(input_str))
+
+with open('day-08/INPUT8.txt', 'r') as f:
+    input_str = f.read()
+print("Antinode count:", solve(input_str))

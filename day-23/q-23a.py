@@ -1,4 +1,4 @@
-#Completed 22/04/2025
+#Completed 22/04/2025#
 
 pairs = []
 with open('day-23/INPUT23.txt', 'r') as f:

@@ -45,7 +45,7 @@ def jnz(operand):
 
 def bxc(operand):
     operand = operand
-    registers['B'] ^= registers['C']  # Operand is ignored
+    registers['B'] ^= registers['C']  # Operand is ignored#
 
 def out(operand):
     value = resolve_combo_operand(operand) % 8

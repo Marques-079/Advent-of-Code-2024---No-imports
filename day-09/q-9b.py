@@ -37,7 +37,7 @@ def part2_compact(disk, file_positions, max_file_id):
                 disk[pos] = str(fid)
             file_positions[fid] = new_positions
 
-with open('day-9/INPUT9.txt', 'r') as f:
+with open('day-09/INPUT9.txt', 'r') as f:
     data = f.readline().strip()
 
 lengths = list(map(int, data))

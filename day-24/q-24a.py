@@ -23,7 +23,7 @@ with open('day-24/INPUT24.txt', 'r') as f:
             gates.append((op, in1, in2, out))
 
 #print(gates)
-#print(wire_values)
+#print(wire_values)#
 
 def XOR(input1, input2):
     if input1 != input2:

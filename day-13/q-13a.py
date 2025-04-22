@@ -58,7 +58,7 @@ def find_calc(ax, ay, bx, by, px, py): #py and px are target positions
         x_calc = x_room // bx #Number of B momvements needed 
         y_calc = y_room // by
 
-        if x_calc == y_calc: #Both agree on same number of B button presses
+        if x_calc == y_calc: #Both agree on same number of B button presses#
             cost = 3 * i + x_calc
             if cost < best_cost:
                 best_cost = cost

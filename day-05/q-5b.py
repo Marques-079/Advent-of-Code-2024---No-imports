@@ -3,7 +3,7 @@
 pair_data = []
 list_data = []
 
-with open('day-5/INPUT5.txt', 'r') as f:
+with open('day-05/INPUT5.txt', 'r') as f:
     for line in f:
         line = line.strip()
         if not line:

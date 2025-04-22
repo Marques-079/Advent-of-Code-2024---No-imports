@@ -1,6 +1,6 @@
 #Completed 04/04/2025
 
-with open('day-6/INPUT6.txt', 'r') as f:
+with open('day-06/INPUT6.txt', 'r') as f:
     grid = [list(line.strip()) for line in f if line.strip()]
 
 n_rows = len(grid)

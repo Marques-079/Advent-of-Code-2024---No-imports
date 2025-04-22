@@ -1,4 +1,4 @@
-with open("day-7/INPUT7.txt") as f:
+with open("day-07/INPUT7.txt") as f:
     all_text = f.read().strip()
 
 lines = all_text.split("\n")

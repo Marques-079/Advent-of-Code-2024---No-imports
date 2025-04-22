@@ -1,6 +1,6 @@
 #Completed 07/04/2025
 
-with open('day-9/INPUT9.txt', 'r') as f:
+with open('day-09/INPUT9.txt', 'r') as f:
     data = f.readline().strip()
 lengths = list(map(int, data))
 disk = []

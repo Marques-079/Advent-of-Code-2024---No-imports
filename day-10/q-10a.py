@@ -1,4 +1,4 @@
-#Completed 07/04/2025
+#Completed 07/04/2025#
 
 grid = []
 with open("day-10/INPUT10.txt", 'r') as f:

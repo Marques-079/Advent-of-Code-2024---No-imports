@@ -1,4 +1,4 @@
-#Completed 23/04/2025
+#Completed 23/04/2025#
 
 with open("day-25/INPUT25.txt", 'r') as f:
     lines = [line.rstrip() for line in f if line.strip()]

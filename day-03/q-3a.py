@@ -1,6 +1,6 @@
-#Completed 31/03/2025 - 0(1) time complexity :D
+#Completed 31/03/2025 - 0(1) time complexity :D#
 
-with open("day-3/INPUT3.txt") as f:
+with open("day-03/INPUT3.txt") as f:
     lines = f.read()
 
 def muls_present(sub): 

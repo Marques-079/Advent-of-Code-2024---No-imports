@@ -69,3 +69,4 @@ for y in range(1, rows-1):
                         count += 1
 
 print(count)
+#
