@@ -1,6 +1,6 @@
-# Completed on 31/03/2025
+# Completed on 31/03/2025#
 
-with open("day-2/INPUT2.txt") as f:
+with open("day-02/INPUT2.txt") as f:
     lines = f.read().strip().splitlines()
 
 data = [list(map(int, line.strip().split())) for line in lines]

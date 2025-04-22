@@ -25,7 +25,7 @@ def safe_with_dampener(arr):
     return False
 
 
-with open("day-2/INPUT2.txt") as f:
+with open("day-02/INPUT2.txt") as f:
     lines = f.read().strip().splitlines()
 
 data = [list(map(int, line.strip().split())) for line in lines]
